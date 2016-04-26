@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Circle Button with submit - Bootsnipp.com</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+      body{margin:40px;}
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+      .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 13px 13px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+      }
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form-group">
+    <h4>Select Days!</h4></br>
+      <div data-toggle="buttons">
+        <label id='Mon' class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="Mon">M</label>
+        <label id="Tu" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="Tu">T</label>
+        <label id="Wed" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="Wed">W</label>
+        <label id="Th" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="Th">Th</label>
+        <label id="F" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="F">F</label>
+        <label id="S" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="S">S</label>
+        <label id="Sun" class="btn btn-default btn-circle btn-lg"><input type="radio" name="q1" value="Sun">Su</label>
+      </div>
+      <div class="form-group">
+        <br>
+        <button id="submit"> submit </button>
+      </div>
+      <div class="form-group" id="outcome">
+          <h4>Days Selected!</h4>
+          <p id="result"></p>
+      </div>
+
+    </div>
+    <script type="text/javascript">
+
+      $(function(){
+        $("input[name='q1']").change(function(event){
+            event.preventDefault();
+
+            console.log('something clicked!', $("input[name=q1]:checked").val());
+            var day = $("input[name=q1]:checked").val();
+
+            if($('#' + day).hasClass("btn btn-default btn-circle btn-lg")){
+              $('#' + day).attr('class', "btn btn-primary btn-circle btn-lg");
+            }else {
+              $('#' + day).attr('class', "btn btn-default btn-circle btn-lg");
+            }
+
+            $(this).attr('checked',false);
+        });
+
+        $("#submit").click(function(event) {
+            event.preventDefault();
+            var weekValues = new Array();
+            var i = 0;
+            $('input:radio').each(function() {
+              var day = $(this).val();
+              if($('#' + day).hasClass("btn btn-primary btn-circle btn-lg")){
+                weekValues[i] = day;
+                i++;
+              }
+            });
+
+            console.log('Days ', weekValues);
+            $('#result').empty();
+            $('#result').append(weekValues.join(','));
+        });
+      });
+    </script>
+  </div>
+</body>
+</html>
