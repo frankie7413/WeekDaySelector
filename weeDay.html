@@ -56,6 +56,7 @@
 
       $(function(){
         $("input[name='q1']").change(function(event){
+            $(this).prop('checked', true);
             event.preventDefault();
 
             console.log('something clicked!', $("input[name=q1]:checked").val());
@@ -66,12 +67,12 @@
             }else {
               $('#' + day).attr('class', "btn btn-default btn-circle btn-lg");
             }
-
-            $(this).attr('checked',false);
         });
+
 
         $("#submit").click(function(event) {
             event.preventDefault();
+
             var weekValues = new Array();
             var i = 0;
             $('input:radio').each(function() {
